@@ -23,7 +23,6 @@
       repeatingTableCell.innerHTML = availabilityTemplate;
       tableRow.appendChild(repeatingTableCell);
       console.log(availabilityTemplate);
-
     });
 
     if (document.getElementsByClassName('schedule-result').length) {
@@ -59,6 +58,21 @@
     console.log(Attendee.all);
 
     appendAttendee(newAttendee);
+    attendeeView.resetInputs();
+  };
+
+  attendeeView.resetInputs = function() {
+    console.log('function fired');
+    let attendeeNameInput = document.getElementById('attendee-name');
+    attendeeNameInput.value = '';
+    attendeeNameInput.focus();
+
+    let scheduleOptions = document.querySelectorAll('.schedule-option');
+
+    for (var i = 0; i < scheduleOptions.length; i++) {
+      console.log(`Schedule Option ${i + 1}`, scheduleOptions[i]);
+      scheduleOptions[i].checked = false;
+    }
   };
 
   module.attendeeView = attendeeView;
