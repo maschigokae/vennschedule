@@ -1,6 +1,6 @@
 /*styles specific to scheduling functionality and results*/
 
 /*hide the table header until at least one response has been submitted*/
-#schedule-results {
+#schedule-headers {
   display: none;
 }
