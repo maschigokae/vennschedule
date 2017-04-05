@@ -4,27 +4,35 @@
   var attendeeView = {};
 
   var appendAttendee = function(attendeeData) {
-    // 'p' elements to be replaced with more approprate elements, using for now to demo js functionality
-    let attendeeTemplate = `<p class="attendee-name">${attendeeData.name}</p>`;
+    let scheduleTable = document.getElementById('schedule-results');
+    let tableRow = document.createElement('tr');
+    let tableCell = document.createElement('td');
 
-    let scheduleTable = document.getElementById('schedule-table');
-    scheduleTable.insertAdjacentHTML('beforebegin', attendeeTemplate);
+    scheduleTable.appendChild(tableRow);
+    tableRow.appendChild(tableCell);
+    tableCell.innerHTML = attendeeData.name;
 
     attendeeData.availability.forEach( (opt, index) => {
       let optKey = `option${index + 1}`;
-      console.log('template', opt[optKey]);
+      let repeatingTableCell = document.createElement('td');
 
-      // 'p' elements to be replaced with more approprate elements, using for now to demo js functionality
-      let availabilityTemplate = `<p class="attend-${opt[optKey]}">Can Attend? ${opt[optKey] ? 'Yes' : 'No'}</p>`;
+      repeatingTableCell.classList.add('schedule-result', `attend-${opt[optKey]}`);
+
+      let availabilityTemplate = `Can Attend? ${opt[optKey] ? 'Yes' : 'No'}`;
+
+      repeatingTableCell.innerHTML = availabilityTemplate;
+      tableRow.appendChild(repeatingTableCell);
       console.log(availabilityTemplate);
 
-      let scheduleTable = document.getElementById('schedule-table');
-      scheduleTable.insertAdjacentHTML('beforebegin', availabilityTemplate);
     });
+
+    if (document.getElementsByClassName('schedule-result').length) {
+      let scheduleResults = document.getElementById('schedule-headers');
+      scheduleResults.style.display = 'table-row';
+    }
   };
 
   attendeeView.createAttendee = function() {
-    console.log('Button was clicked');
     event.preventDefault();
     let attendeeName = event.target.attendeeName.value;
 
