@@ -4,3 +4,14 @@
 #schedule-headers {
   display: none;
 }
+
+/*temp styles as developer visual aids*/
+.attend-true {
+  color: white;
+  background: green;
+}
+
+.attend-false {
+  color: white;
+  background: red;
+}
