@@ -19,7 +19,7 @@
 
       repeatingTableCell.classList.add('schedule-result', `attend-${opt[optKey]}`, optKey);
 
-      let availabilityTemplate = `Can Attend? ${opt[optKey] ? 'Yes' : 'No'}`;
+      let availabilityTemplate = opt[optKey] ? 'YES' : 'NO';
 
       repeatingTableCell.innerHTML = availabilityTemplate;
       tableRow.appendChild(repeatingTableCell);
