@@ -1,17 +1,67 @@
 /*styles specific to scheduling functionality and results*/
 
-/*hide the table header until at least one response has been submitted*/
 #schedule-headers {
+  /*hide the table header until at least one response has been submitted*/
   display: none;
 }
 
-/*temp styles as developer visual aids*/
+.schedule-poll {
+  text-align: center;
+  line-height: 2;
+}
+
+.schedule-poll h2 {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 4;
+}
+
+table {
+  margin: auto;
+}
+
+#table-name-header {
+  background: #bbb;
+  position: relative;
+}
+
+#table-name-header span {
+  font-weight: 700;
+  position: absolute;
+  bottom: 25%;
+  right: 10%;
+  left: 10%;
+}
+
+.option-header {
+  background: #ddd;
+}
+
+th span {
+  display: block;
+  line-height: 1.3;
+  margin: 3px auto;
+}
+
+th, td {
+  min-width: 150px;
+  min-height: 50px;
+  border: 3px solid #fff;
+}
+
+.attendee-names {
+  color: #444;
+  background: #ddd;
+}
+
+.schedule-result {
+  color: #444;
+}
+
 .attend-true {
-  color: white;
-  background: green;
+  background: #afdf81;
 }
 
 .attend-false {
-  color: white;
-  background: red;
+  background: #fe9398;
 }
