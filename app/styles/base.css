@@ -1,5 +1,43 @@
-html {
+/*global body styles*/
+body {
   font-family: Helvetica;
+  font-size: 18px;
+  color: #555;
 }
 
-/*TODO: build out base styles*/
+/*header styles*/
+header {
+  text-align: center;
+  background: #888;
+  height: 11vw;
+}
+
+header h1, header h2 {
+  color: #ccc;
+}
+
+header h1 {
+  font-size: 5.8vw;
+  line-height: 1.3;
+}
+
+header h2 {
+  font-size: 1.6vw;
+}
+
+/*main styles*/
+main {
+  min-height: calc(70vh - 7vw);
+  margin: 30px auto;
+  border: solid 1px #ccc;
+  width: 92%;
+}
+
+/*footer styles*/
+footer {
+  color: #ccc;
+  background: #888;
+  height: 100px;
+  text-align: center;
+  line-height: 5;
+}
