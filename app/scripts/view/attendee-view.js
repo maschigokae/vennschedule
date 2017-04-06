@@ -11,12 +11,13 @@
     scheduleTable.appendChild(tableRow);
     tableRow.appendChild(tableCell);
     tableCell.innerHTML = attendeeData.name;
+    tableCell.classList.add('attendee-names');
 
     attendeeData.availability.forEach( (opt, index) => {
       let optKey = `option${index + 1}`;
       let repeatingTableCell = document.createElement('td');
 
-      repeatingTableCell.classList.add('schedule-result', `attend-${opt[optKey]}`);
+      repeatingTableCell.classList.add('schedule-result', `attend-${opt[optKey]}`, optKey);
 
       let availabilityTemplate = `Can Attend? ${opt[optKey] ? 'Yes' : 'No'}`;
 
@@ -29,6 +30,15 @@
       scheduleResults.style.display = 'table-row';
     }
   };
+
+  var calculatePollTotals = function(opts) {
+    console.log('Number of Options:', opts);
+
+    for (var i = 0; i < opts.length; i++) {
+      let affirmativeResponses = document.querySelectorAll(`.option${i + 1}.attend-true`);
+      console.log(`Yes responses for option ${i + 1}:`, affirmativeResponses.length);
+    };
+  }
 
   attendeeView.createAttendee = function() {
     event.preventDefault();
@@ -51,6 +61,7 @@
     Attendee.all.push(newAttendee);
 
     appendAttendee(newAttendee);
+    calculatePollTotals(newAttendee.availability);
     attendeeView.resetInputs();
   };
 
