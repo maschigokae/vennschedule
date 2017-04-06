@@ -74,3 +74,9 @@ tfoot {
   font-size: 16px;
   background: #bbb;
 }
+
+.most-yes-responses::after {
+  content: " \2713 ";
+  color: #068a00;
+  font-weight: 700;
+}

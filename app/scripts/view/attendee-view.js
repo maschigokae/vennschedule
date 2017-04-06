@@ -35,12 +35,26 @@
   };
 
   var calculatePollTotals = function(opts) {
+    let updatedTotals = [];
+
     for (var i = 0; i < opts.length; i++) {
       let affirmativeResponses = document.querySelectorAll(`.option${i + 1}.attend-true`);
       let pollTotalCell = document.getElementById(`option-${i + 1}-total`);
       pollTotalCell.innerHTML = affirmativeResponses.length;
+      updatedTotals.push(affirmativeResponses.length);
     };
-  }
+
+    for (var i = 0; i < opts.length; i++) {
+      let affirmativeResponses = document.querySelectorAll(`.option${i + 1}.attend-true`);
+      let pollTotalCell = document.getElementById(`option-${i + 1}-total`);
+
+      pollTotalCell.classList.remove('most-yes-responses');
+
+      if (affirmativeResponses.length === Math.max(...updatedTotals)) {
+        pollTotalCell.classList.add('most-yes-responses');
+      }
+    };
+  };
 
   attendeeView.createAttendee = function() {
     event.preventDefault();
