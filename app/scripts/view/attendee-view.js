@@ -28,15 +28,17 @@
     if (document.getElementsByClassName('schedule-result').length) {
       let scheduleResults = document.getElementById('schedule-headers');
       scheduleResults.style.display = 'table-row';
+
+      let pollTotals = document.getElementById('poll-yes-totals');
+      pollTotals.style.display = 'table-row';
     }
   };
 
   var calculatePollTotals = function(opts) {
-    console.log('Number of Options:', opts);
-
     for (var i = 0; i < opts.length; i++) {
       let affirmativeResponses = document.querySelectorAll(`.option${i + 1}.attend-true`);
-      console.log(`Yes responses for option ${i + 1}:`, affirmativeResponses.length);
+      let pollTotalCell = document.getElementById(`option-${i + 1}-total`);
+      pollTotalCell.innerHTML = affirmativeResponses.length;
     };
   }
 
