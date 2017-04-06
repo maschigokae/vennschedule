@@ -9,8 +9,8 @@
   </head>
   <body>
     <header>
-      <h1>VennSchedule — An app to help busy people find time for each other.</h1>
-      <!-- TODO: add logo, navbar -->
+        <h1>VennSchedule</h1>
+        <h2>An app to help busy people find time for each other.</h2>
     </header>
 
     <main>
@@ -29,15 +29,15 @@
             </tr>
           </thead>
           <tbody id="schedule-results">
+            <!-- Poll results appended here -->
           </tbody>
-          <!-- Poll results appended here -->
         </table>
 
         <form id="schedule-selector">
           <fieldset>
             <legend>Add a New Attendee</legend>
             <label for="attendeeName">Attendee Name</label>
-            <input name="attendeeName" type="text" placeholder="Name" autofocus id="attendee-name">
+            <input name="attendeeName" type="text" placeholder="Name" autofocus required id="attendee-name">
             <label for="option1">Monday</label>
             <input type="checkbox" class="schedule-option" id="option1">
             <label for="option2">Tuesday</label>
