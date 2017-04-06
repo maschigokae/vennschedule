@@ -20,12 +20,31 @@
         <table>
           <thead>
             <tr id="schedule-headers">
-              <th>Name</th>
-              <th>Option 1</th>
-              <th>Option 2</th>
-              <th>Option 3</th>
-              <th>Option 4</th>
-              <th>Option 5</th>
+              <th id="table-name-header">
+                <span>Name</span>
+              </th>
+
+              <!-- With admin functionality, these headers would be dynamically populated with form input data when admin creates an event -->
+              <th class="option-header">
+                <span>Option 1:</span>
+                <span>Monday</span>
+              </th>
+              <th class="option-header">
+                <span>Option 2:</span>
+                <span>Tuesday</span>
+              </th>
+              <th class="option-header">
+                <span>Option 3:</span>
+                <span>Wednesday</span>
+              </th>
+              <th class="option-header">
+                <span>Option 4:</span>
+                <span>Thursday</span>
+              </th>
+              <th class="option-header">
+                <span>Option 5:</span>
+                <span>Friday</span>
+              </th>
             </tr>
           </thead>
           <tbody id="schedule-results">
