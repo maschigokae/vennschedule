@@ -1,6 +1,6 @@
 /*styles specific to scheduling functionality and results*/
 
-#schedule-headers {
+#schedule-headers, #poll-yes-totals {
   /*hide the table header until at least one response has been submitted*/
   display: none;
 }
@@ -64,4 +64,13 @@ th, td {
 
 .attend-false {
   background: #fe9398;
+}
+
+tfoot {
+  background: #ddd;
+}
+
+#total-yes-votes {
+  font-size: 16px;
+  background: #bbb;
 }
