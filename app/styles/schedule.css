@@ -1,5 +1,49 @@
 /*styles specific to scheduling functionality and results*/
 
+#schedule-selector {
+  width: 80%;
+  padding: 10px;
+  margin: 15px auto;
+  background: #ddd;
+}
+
+#schedule-selector legend {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+#schedule-selector label:not(:first-of-type):before {
+  content: "\002F";
+  font-weight: 700;
+  opacity: 0.3;
+  margin: 0 12px 0 8px;
+}
+
+#attendee-name {
+  width: 60%;
+  display: block;
+  margin: 8px auto;
+  font-size: 15px;
+  padding: 4px;
+}
+
+.btn-primary {
+  display: block;
+  width: 20%;
+  color: #ccc;
+  background: #777;
+  font-size: 15px;
+  text-transform: uppercase;
+  border: none;
+  padding: 5px 0 5px 0;
+  margin: 8px auto;
+}
+
+.btn-primary:hover {
+  color: #444;
+  background: #999;
+}
+
 #schedule-headers, #poll-yes-totals {
   /*hide the table header until at least one response has been submitted*/
   display: none;
