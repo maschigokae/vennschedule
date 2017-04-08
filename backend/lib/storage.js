@@ -37,6 +37,19 @@ exports.lookupEntry = function(schemaName, id) {
   });
 };
 
+exports.lookupAllEntries = function(schemaName) {
+  debug('lookupAllEntries');
+
+  return new Promise((resolve, reject) => {
+    if (!schemaName) return reject(createError(400, 'expected schema name'));
+
+    var schema = inMemoryStorage[schemaName];
+    if (!schema) return reject(createError(404, 'schema not found, or no entries exist for schema'));
+
+    resolve(schema);
+  });
+};
+
 exports.editEntry = function(schemaName, id, entry) {
   debug('editEntry');
 
@@ -58,15 +71,15 @@ exports.editEntry = function(schemaName, id, entry) {
   });
 };
 
-exports.lookupAllEntries = function(schemaName) {
-  debug('lookupAllEntries');
+exports.deleteEntry = function(schemaName, id) {
+  debug('deleteEntry');
 
-  return new Promise((resolve, reject) => {
-    if (!schemaName) return reject(createError(400, 'expected schema name'));
+  if (!schemaName) return Promise.reject(createError(400, 'expected schema name'));
+  if (!id) return Promise.reject(createError(400, 'expected id'));
 
-    var schema = inMemoryStorage[schemaName];
-    if (!schema) return reject(createError(404, 'schema not found, or no entries exist for schema'));
+  var schema = inMemoryStorage[schemaName];
+  if (!schema) return Promise.reject(createError(404, 'schema not found'));
+  if (!schema[id]) return Promise.reject(createError(404, 'entry not found'));
 
-    resolve(schema);
-  });
+  return Promise.resolve(delete inMemoryStorage[schemaName][id]);
 };
