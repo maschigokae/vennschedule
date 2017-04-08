@@ -38,4 +38,12 @@ attendeeRouter.put('/api/attendee/:id', parseJSON, function(req, res, next) {
   .catch( err => next(err));
 });
 
+attendeeRouter.delete('/api/attendee/:id', function(req, res, next) {
+  debug('DELETE: /api/attendee/:id');
+
+  Attendee.deleteAttendee(req.params.id)
+  .then(res.sendStatus(204))
+  .catch( err => next(err));
+});
+
 module.exports = attendeeRouter;
