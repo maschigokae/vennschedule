@@ -44,7 +44,7 @@ exports.lookupAllEntries = function(schemaName) {
     if (!schemaName) return reject(createError(400, 'expected schema name'));
 
     var schema = inMemoryStorage[schemaName];
-    if (!schema) return reject(createError(404, 'schema not found, or no entries exist for schema'));
+    if (!schema) schema = {};
 
     resolve(schema);
   });
