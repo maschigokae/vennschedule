@@ -42,7 +42,12 @@ attendeeRouter.delete('/api/attendee/:id', function(req, res, next) {
   debug('DELETE: /api/attendee/:id');
 
   Attendee.deleteAttendee(req.params.id)
-  .then(res.sendStatus(204))
+  .then(
+    attendee => {
+      console.log('attendee data deleted:', attendee);
+      res.sendStatus(204);
+    }
+  )
   .catch( err => next(err));
 });
 
