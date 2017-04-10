@@ -51,9 +51,40 @@ const API_URL = 'http://localhost:8080';
     ajaxPostRequest.setRequestHeader("Content-Type", "application/json");
     ajaxPostRequest.send(JSON.stringify(data));
 
+    ajaxPostRequest.onload = function() {
+      if (ajaxPostRequest.status === 200) {
+        var attendeeData = JSON.parse(ajaxPostRequest.responseText);
+        console.log('Newly POSTed Attendee Data from server:', attendeeData);
+        attendeeView.appendAttendee(attendeeData);
+        attendeeView.calculatePollTotals(attendeeData.availability);
+      } else {
+        console.log('Sorry, there was an error.');
+      }
+    };
+
     ajaxPostRequest.onerror = function() {
       // add error handling here
-    }
+    };
+  };
+
+  Attendee.editAttendeeData = function(id, data) {
+    var ajaxPutRequest = new XMLHttpRequest();
+    ajaxPostRequest.open('PUT', `${API_URL}/api/attendee/${id}`, true);
+    ajaxPostRequest.setRequestHeader("Content-Type", "application/json");
+    ajaxPostRequest.send(JSON.stringify(data));
+
+    ajaxPostRequest.onerror = function() {
+      // add error handling here
+    };
+  };
+
+  Attendee.deleteAttendeeData = function(id) {
+    var ajaxDeleteRequest = new XMLHttpRequest();
+    ajaxDeleteRequest.open('DELETE', `${API_URL}/api/attendee/${id}`, true);
+
+    ajaxPostRequest.onerror = function() {
+      // add error handling here
+    };
   };
 
   module.Attendee = Attendee;

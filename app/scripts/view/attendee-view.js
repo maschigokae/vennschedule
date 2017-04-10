@@ -3,14 +3,17 @@
 (function(module) {
   var attendeeView = {};
 
-  var appendAttendee = function(attendeeData) {
+  attendeeView.appendAttendee = function(attendeeData) {
     let scheduleTable = document.getElementById('schedule-results');
     let tableRow = document.createElement('tr');
     let tableCell = document.createElement('td');
 
     scheduleTable.appendChild(tableRow);
     tableRow.appendChild(tableCell);
-    tableCell.innerHTML = attendeeData.name;
+    tableCell.innerHTML = `<button id="attendee-id-${attendeeData.id}">Edit</button><span>${attendeeData.name}</span>`;
+    var editAttendee = document.getElementById(`attendee-id-${attendeeData.id}`);
+    editAttendee.addEventListener('click', attendeeView.editAttendee);
+
     tableCell.classList.add('attendee-names');
 
     attendeeData.availability.forEach( (opt, index) => {
@@ -34,7 +37,7 @@
     }
   };
 
-  var calculatePollTotals = function(opts) {
+  attendeeView.calculatePollTotals = function(opts) {
     let updatedTotals = [];
 
     for (var i = 0; i < opts.length; i++) {
@@ -62,8 +65,8 @@
 
     Attendee.all.forEach( attendee => {
       console.log('Attendee view - each attendee', attendee);
-      appendAttendee(attendee);
-      calculatePollTotals(attendee.availability);
+      attendeeView.appendAttendee(attendee);
+      attendeeView.calculatePollTotals(attendee.availability);
     });
   };
 
@@ -87,10 +90,50 @@
 
     console.log('new attendee:', JSON.stringify(newAttendee));
 
-    appendAttendee(newAttendee);
     Attendee.postAttendee(newAttendee);
-    calculatePollTotals(newAttendee.availability);
     attendeeView.resetInputs();
+  };
+
+  attendeeView.editAttendee = function() {
+    let editMode = event.target.parentElement.parentElement;
+    console.log('Nodes to edit', editMode.childNodes.length);
+    let editName = event.target.nextSibling.textContent;
+
+    editMode.classList.add('edit-mode');
+    editMode.insertAdjacentHTML('beforebegin', `<div><form id="${event.target.id}-form"></form></div>`);
+
+    let editForm = document.getElementById(`${event.target.id}-form`);
+    console.log(editForm);
+    let fieldset = document.createElement('fieldset');
+    let div = document.createElement('div');
+
+    editForm.appendChild(fieldset);
+    fieldset.appendChild(div);
+    div.innerHTML = `<input name="attendeeName" type="text" value="${editName}" autofocus required id="submit-${event.target.id}">`;
+
+    for (var i = 1; i < editMode.childNodes.length; i++) {
+      console.log('Nodes to edit', editMode.childNodes[i]);
+
+      let repeatingDiv = document.createElement('div');
+      fieldset.appendChild(repeatingDiv);
+
+      let checkboxChecked = editMode.childNodes[i].classList.contains('attend-true');
+      repeatingDiv.innerHTML = checkboxChecked ? `<input type="checkbox" checked class="schedule-option" id="option${i}">` : `<input type="checkbox" class="schedule-option" id="option${i}">`;
+    };
+
+    let submitButton = document.createElement('div');
+    fieldset.appendChild(submitButton);
+    submitButton.innerHTML = '<input class="btn-primary" type="submit" value="Submit">';
+
+    let formID = document.getElementById(`${event.target.id}-form`);
+    formID.addEventListener('submit', attendeeView.updateAttendee);
+  };
+
+  attendeeView.updateAttendee = function() {
+    console.log('updating in progress!');
+
+    event.preventDefault();
+    console.log(event.target);
   };
 
   attendeeView.resetInputs = function() {
