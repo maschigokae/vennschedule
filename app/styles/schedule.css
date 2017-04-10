@@ -124,3 +124,17 @@ tfoot {
   color: #068a00;
   font-weight: 700;
 }
+
+/*edit attendee form styles*/
+
+.edit-mode .attend-true:hover {
+  background: #f75128;
+}
+
+.edit-mode .attend-false:hover {
+  background: #2eb823;
+}
+
+.edit-schedule-option {
+  opacity: .5;
+}
