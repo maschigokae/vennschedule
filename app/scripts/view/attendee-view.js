@@ -63,7 +63,13 @@
       };
 
       updatedAvailability ? makeAvailable() : makeUnavailable();
+
     };
+
+    attendeeView.calculatePollTotals(updatedAttendeeData.availability);
+
+    let editForm = document.getElementById(`attendee-id-${updatedAttendeeData.id}-form`);
+    editForm.remove();
   };
 
   attendeeView.calculatePollTotals = function(opts) {
