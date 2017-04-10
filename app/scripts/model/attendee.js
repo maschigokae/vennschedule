@@ -17,10 +17,18 @@ const API_URL = 'http://localhost:8080';
     var ajaxGetAllRequest = new XMLHttpRequest();
     ajaxGetAllRequest.open('GET', `${API_URL}/api/attendee`, true);
 
-    ajaxGetAllRequest.onload = function(responseData) {
+    ajaxGetAllRequest.onload = function() {
       if (ajaxGetAllRequest.status === 200) {
         var attendeeData = JSON.parse(ajaxGetAllRequest.responseText);
-        console.log(attendeeData);
+        console.log('Initial parsed Attendee Data from server:', attendeeData);
+
+        console.log('Attendee Object Keys', Object.keys(attendeeData));
+
+        for (var i = 0; i < Object.keys(attendeeData).length; i++) {
+          console.log('Each Attendee Object:', attendeeData[i + 1]);
+          Attendee.all.push(attendeeData[i + 1]);
+        }
+        console.log('Array of Attendee Objects:', Attendee.all);
       } else {
         console.log('Sorry, there was an error.');
       }
