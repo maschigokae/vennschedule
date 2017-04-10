@@ -133,7 +133,28 @@
     console.log('updating in progress!');
 
     event.preventDefault();
-    console.log(event.target);
+
+    let idToUpdate = parseInt(event.target.id.replace(/[^0-9\.]/g, ''), 10);
+    let updatedAttendeeName = event.target.attendeeName.value;
+    let updatedAttendeeAvailability = [];
+
+    for (var i = 2; i < event.target.length - 1; i++) {
+      updatedAttendeeAvailability.push({
+        [`option${i - 1}`] : event.target[i].checked
+      });
+    };
+
+    console.log(updatedAttendeeName, updatedAttendeeAvailability);
+
+    var updatedAttendee = new Attendee({
+      name: updatedAttendeeName,
+      availability: updatedAttendeeAvailability
+    });
+
+    Attendee.editAttendeeData(idToUpdate, updatedAttendee);
+
+
+
   };
 
   attendeeView.resetInputs = function() {
