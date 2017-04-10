@@ -88,6 +88,7 @@
     console.log('new attendee:', JSON.stringify(newAttendee));
 
     appendAttendee(newAttendee);
+    Attendee.postAttendee(newAttendee);
     calculatePollTotals(newAttendee.availability);
     attendeeView.resetInputs();
   };

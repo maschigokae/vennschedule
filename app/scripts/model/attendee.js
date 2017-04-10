@@ -45,5 +45,16 @@ const API_URL = 'http://localhost:8080';
     ajaxGetAllRequest.send();
   };
 
+  Attendee.postAttendee = function(data) {
+    var ajaxPostRequest = new XMLHttpRequest();
+    ajaxPostRequest.open('POST', `${API_URL}/api/attendee`, true);
+    ajaxPostRequest.setRequestHeader("Content-Type", "application/json");
+    ajaxPostRequest.send(JSON.stringify(data));
+
+    ajaxPostRequest.onerror = function() {
+      // add error handling here
+    }
+  };
+
   module.Attendee = Attendee;
 })(window);
