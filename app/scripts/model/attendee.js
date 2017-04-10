@@ -24,9 +24,11 @@ const API_URL = 'http://localhost:8080';
 
         console.log('Attendee Object Keys', Object.keys(attendeeData));
 
-        for (var i = 0; i < Object.keys(attendeeData).length; i++) {
-          console.log('Each Attendee Object:', attendeeData[i + 1]);
-          Attendee.all.push(attendeeData[i + 1]);
+        let attendeeKey = Object.keys(attendeeData);
+
+        for (var i = 0; i < attendeeKey.length; i++) {
+          console.log('Each Attendee Object:', attendeeData[attendeeKey[i]]);
+          Attendee.all.push(attendeeData[attendeeKey[i]]);
         }
         console.log('Array of Attendee Objects:', Attendee.all);
       } else {
