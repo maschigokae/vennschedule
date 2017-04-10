@@ -77,7 +77,7 @@ const API_URL = 'http://localhost:8080';
       if (ajaxPutRequest.status === 200) {
         var attendeeData = JSON.parse(ajaxPutRequest.responseText);
         console.log('Newly Updated Attendee Data from server:', attendeeData);
-        attendeeView.appendAttendee(attendeeData);
+        attendeeView.replaceUpdatedAttendee(attendeeData);
         attendeeView.calculatePollTotals(attendeeData.availability);
       } else {
         console.log('Sorry, there was an error.');

@@ -37,6 +37,35 @@
     }
   };
 
+  attendeeView.replaceUpdatedAttendee = function(updatedAttendeeData) {
+    let updatedAttendeeRecord = document.getElementById(`attendee-id-${updatedAttendeeData.id}`).parentElement;
+    console.log('Stuff I want to update', updatedAttendeeRecord.lastChild);
+
+    updatedAttendeeRecord.lastChild.textContent = updatedAttendeeData.name;
+
+    let updatedAvailabilityNodes = updatedAttendeeRecord.parentElement.childNodes;
+    console.log('Availability info I want to update', updatedAvailabilityNodes);
+
+    for (var i = 0; i < updatedAvailabilityNodes.length - 1; i++) {
+
+      let nodeToUpdate = updatedAvailabilityNodes[i + 1];
+      let updatedAvailability = updatedAttendeeData.availability[i][`option${i + 1}`];
+      console.log(nodeToUpdate, updatedAvailability);
+
+      let makeAvailable = function() {
+        nodeToUpdate.classList.remove('attend-false');
+        nodeToUpdate.classList.add('attend-true');
+      };
+
+      let makeUnavailable = function() {
+        nodeToUpdate.classList.remove('attend-true');
+        nodeToUpdate.classList.add('attend-false');
+      };
+
+      updatedAvailability ? makeAvailable() : makeUnavailable();
+    };
+  };
+
   attendeeView.calculatePollTotals = function(opts) {
     let updatedTotals = [];
 
@@ -152,8 +181,6 @@
     });
 
     Attendee.editAttendeeData(idToUpdate, updatedAttendee);
-
-
 
   };
 
