@@ -56,6 +56,17 @@
     };
   };
 
+  attendeeView.renderAttendees = function() {
+
+    console.log('Attendee view - all attendees', Attendee.all);
+
+    Attendee.all.forEach( attendee => {
+      console.log('Attendee view - each attendee', attendee);
+      appendAttendee(attendee);
+      calculatePollTotals(attendee.availability);
+    });
+  };
+
   attendeeView.createAttendee = function() {
     event.preventDefault();
     let attendeeName = event.target.attendeeName.value;
@@ -74,7 +85,7 @@
       availability: attendeeAvailability
     });
 
-    Attendee.all.push(newAttendee);
+    console.log('new attendee:', JSON.stringify(newAttendee));
 
     appendAttendee(newAttendee);
     calculatePollTotals(newAttendee.availability);

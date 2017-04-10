@@ -31,6 +31,8 @@ const API_URL = 'http://localhost:8080';
           Attendee.all.push(attendeeData[attendeeKey[i]]);
         }
         console.log('Array of Attendee Objects:', Attendee.all);
+
+        attendeeView.renderAttendees();
       } else {
         console.log('Sorry, there was an error.');
       }
