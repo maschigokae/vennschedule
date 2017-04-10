@@ -70,6 +70,12 @@
 
     let editForm = document.getElementById(`attendee-id-${updatedAttendeeData.id}-form`);
     editForm.remove();
+
+    let editModeNodes = document.getElementsByClassName('edit-mode');
+
+    for (var i = 0; i < editModeNodes.length; i++) {
+      editModeNodes[i].classList.remove('edit-mode');
+    };
   };
 
   attendeeView.calculatePollTotals = function(opts) {
@@ -153,7 +159,7 @@
       fieldset.appendChild(repeatingDiv);
 
       let checkboxChecked = editMode.childNodes[i].classList.contains('attend-true');
-      repeatingDiv.innerHTML = checkboxChecked ? `<input type="checkbox" checked class="schedule-option" id="option${i}">` : `<input type="checkbox" class="schedule-option" id="option${i}">`;
+      repeatingDiv.innerHTML = checkboxChecked ? `<input type="checkbox" checked class="edit-schedule-option" id="option${i}">` : `<input type="checkbox" class="edit-schedule-option" id="option${i}">`;
     };
 
     let submitButton = document.createElement('div');
@@ -165,8 +171,6 @@
   };
 
   attendeeView.updateAttendee = function() {
-    console.log('updating in progress!');
-
     event.preventDefault();
 
     let idToUpdate = parseInt(event.target.id.replace(/[^0-9\.]/g, ''), 10);
