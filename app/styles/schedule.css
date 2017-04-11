@@ -128,11 +128,15 @@ tfoot {
 /*edit attendee form styles*/
 
 .edit-mode .attend-true:hover {
-  background: #f75128;
+  opacity: .2;
+  content: " \2713 ";
+  cursor: pointer;
 }
 
 .edit-mode .attend-false:hover {
-  background: #2eb823;
+  opacity: .2;
+  content: " \2713 ";
+  cursor: pointer;
 }
 
 .edit-schedule-option {
