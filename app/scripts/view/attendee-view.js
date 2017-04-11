@@ -220,12 +220,10 @@
         };
 
         node.classList.contains('initial-availability') ? unchecked() : checked();
-        console.log(node.classList.contains('initial-availability'));
       });
     };
 
     for (var i = 0; i < availabilityCheckboxes.length; i ++) {
-      console.log('availabilityCheckboxes', availabilityCheckboxes[i].parentElement);
       toggleCheckedClass(availabilityCheckboxes[i].parentElement);
     };
   };
