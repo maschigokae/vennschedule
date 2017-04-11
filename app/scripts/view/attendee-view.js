@@ -104,7 +104,7 @@
     });
   };
 
-  attendeeView.createAttendee = function() {
+  attendeeView.createAttendee = function(event) {
     event.preventDefault();
     let attendeeName = event.target.attendeeName.value;
 
@@ -126,7 +126,7 @@
     attendeeView.resetInputs();
   };
 
-  attendeeView.editAttendee = function() {
+  attendeeView.editAttendee = function(event) {
     let editMode = event.target.parentElement.parentElement;
     let editName = event.target.nextSibling.textContent;
     let attendeeIdToEdit = event.target.id;
@@ -180,7 +180,7 @@
     };
   };
 
-  attendeeView.updateAttendee = function() {
+  attendeeView.updateAttendee = function(event) {
     event.preventDefault();
 
     let idToUpdate = parseInt(event.target.id.replace(/[^0-9\.]/g, ''), 10);
