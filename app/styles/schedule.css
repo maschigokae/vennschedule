@@ -4,7 +4,6 @@
   text-align: left;
   width: 990px;
   margin: 15px auto;
-  /*background: #ddd;*/
 }
 
 #schedule-selector fieldset div {
@@ -21,7 +20,6 @@
 }
 
 #schedule-selector fieldset div input[type=checkbox] {
-  /*outline: 1px solid red;*/
   display: none;
 }
 
