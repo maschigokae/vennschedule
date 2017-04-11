@@ -30,10 +30,12 @@
 #schedule-selector fieldset div:first-of-type {
   width: 215px;
   background: #ddd;
+  float: left;
+  margin-right: 5px;
 }
 
 #schedule-selector fieldset div:last-of-type {
-  width: 128px;
+  width: 130px;
 }
 
 #schedule-selector legend {
@@ -51,7 +53,7 @@
 #attendee-name {
   width: 80%;
   display: block;
-  margin: 8px auto;
+  margin: 6px auto;
   font-size: 15px;
   padding: 4px 4px 4px 0;
 }
