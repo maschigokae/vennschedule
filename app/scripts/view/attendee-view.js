@@ -55,11 +55,13 @@
       let makeAvailable = function() {
         nodeToUpdate.classList.remove('attend-false');
         nodeToUpdate.classList.add('attend-true');
+        nodeToUpdate.textContent = 'YES';
       };
 
       let makeUnavailable = function() {
         nodeToUpdate.classList.remove('attend-true');
         nodeToUpdate.classList.add('attend-false');
+        nodeToUpdate.textContent = 'NO';
       };
 
       updatedAvailability ? makeAvailable() : makeUnavailable();
