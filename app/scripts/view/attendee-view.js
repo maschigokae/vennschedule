@@ -142,6 +142,9 @@
     console.log('Nodes to edit', editMode.childNodes.length);
     let editName = event.target.nextSibling.textContent;
 
+    let attendeeIdToEdit = event.target.id
+    console.log('ID I need to edit...', attendeeIdToEdit);
+
     editMode.classList.add('edit-mode');
     editMode.insertAdjacentHTML('beforebegin', `<div><form id="${event.target.id}-form"></form></div>`);
 
@@ -155,21 +158,41 @@
     div.innerHTML = `<input name="attendeeName" type="text" value="${editName}" autofocus required id="submit-${event.target.id}">`;
 
     for (var i = 1; i < editMode.childNodes.length; i++) {
-      console.log('Nodes to edit', editMode.childNodes[i]);
-
       let repeatingDiv = document.createElement('div');
       fieldset.appendChild(repeatingDiv);
 
       let checkboxChecked = editMode.childNodes[i].classList.contains('attend-true');
-      repeatingDiv.innerHTML = checkboxChecked ? `<input type="checkbox" checked class="edit-schedule-option" id="option${i}">` : `<input type="checkbox" class="edit-schedule-option" id="option${i}">`;
+      repeatingDiv.innerHTML = checkboxChecked ? `<input type="checkbox" checked class="edit-schedule-option" id="${event.target.id}-option${i}">` : `<input type="checkbox" class="edit-schedule-option" id="${event.target.id}-option${i}">`;
     };
 
     let submitButton = document.createElement('div');
     fieldset.appendChild(submitButton);
-    submitButton.innerHTML = '<input class="btn-primary" type="submit" value="Submit">';
+    submitButton.innerHTML = '<input class="btn-dynamic" type="submit" value="Submit">';
 
     let formID = document.getElementById(`${event.target.id}-form`);
     formID.addEventListener('submit', attendeeView.updateAttendee);
+
+    let toggleAvailability = function(node, classToRemove, classToAdd) {
+      classToRemove === 'attend-false' ? node.textContent = 'YES' : node.textContent = 'NO'
+      node.classList.remove(classToRemove);
+      node.classList.add(classToAdd);
+    }
+
+    let toggleCheckboxEvent = function(node) {
+      let toggleCheckbox = document.getElementById(`${attendeeIdToEdit}-option${node}`);
+
+      let correspondingAvailabilityNode = toggleCheckbox.parentElement.parentElement.parentElement.parentElement.nextSibling.childNodes[node];
+
+      correspondingAvailabilityNode.addEventListener('click', function() {
+        toggleCheckbox.checked ? toggleCheckbox.checked = false : toggleCheckbox.checked = true;
+        toggleCheckbox.checked ? toggleAvailability(correspondingAvailabilityNode, 'attend-false', 'attend-true') : toggleAvailability(correspondingAvailabilityNode, 'attend-true', 'attend-false')
+      });
+    };
+
+    for (var i = 1; i < editMode.childNodes.length; i++) {
+      let proxyInput = editMode.childNodes[i];
+      toggleCheckboxEvent(i);
+    };
   };
 
   attendeeView.updateAttendee = function() {

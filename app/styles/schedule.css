@@ -94,8 +94,14 @@ th, td {
 }
 
 .attendee-names {
+  text-align: left;
   color: #444;
   background: #ddd;
+  min-width: 200px;
+}
+
+.attendee-names button, .attendee-names span {
+  margin-left: 10px;
 }
 
 .schedule-result {
@@ -127,18 +133,29 @@ tfoot {
 
 /*edit attendee form styles*/
 
-.edit-mode .attend-true:hover {
-  opacity: .2;
-  content: " \2713 ";
-  cursor: pointer;
+#schedule-results form div {
+  display:table-cell;
 }
 
-.edit-mode .attend-false:hover {
+#schedule-results div {
+  position: relative;
+}
+
+#schedule-results form {
+  position: absolute;
+  bottom: 1;
+  left: 10px;
+}
+
+.edit-mode button, .edit-mode span {
+  display: none;
+}
+
+.edit-mode .attend-true:hover, .edit-mode .attend-false:hover {
   opacity: .2;
-  content: " \2713 ";
   cursor: pointer;
 }
 
 .edit-schedule-option {
-  opacity: .5;
+  display: none;
 }
