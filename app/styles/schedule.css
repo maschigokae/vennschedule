@@ -14,6 +14,10 @@
   background: #ddd;
 }
 
+#schedule-selector fieldset div:not(:first-of-type) {
+  padding: 16px 0 10px 12px;
+}
+
 #schedule-selector fieldset div:not(:first-of-type):hover {
   background: #afdf81;
   cursor: pointer;
@@ -24,7 +28,6 @@
 }
 
 #schedule-selector fieldset div:first-of-type {
-  padding: 0 0 0 12px;
   width: 215px;
   background: #ddd;
 }
