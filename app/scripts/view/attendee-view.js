@@ -202,6 +202,34 @@
 
   };
 
+  attendeeView.toggleInputs = function() {
+    let availabilityCheckboxes = document.getElementsByClassName('schedule-option');
+
+    let toggleCheckedClass = function(node) {
+      node.addEventListener('click', function(event) {
+        event.preventDefault();
+
+        let checked = function() {
+          node.classList.add('initial-availability');
+          node.getElementsByTagName('input')[0].checked = true;
+        };
+
+        let unchecked = function() {
+          node.classList.remove('initial-availability')
+          node.getElementsByTagName('input')[0].checked = false;
+        };
+
+        node.classList.contains('initial-availability') ? unchecked() : checked();
+        console.log(node.classList.contains('initial-availability'));
+      });
+    };
+
+    for (var i = 0; i < availabilityCheckboxes.length; i ++) {
+      console.log('availabilityCheckboxes', availabilityCheckboxes[i].parentElement);
+      toggleCheckedClass(availabilityCheckboxes[i].parentElement);
+    };
+  };
+
   attendeeView.resetInputs = function() {
     let attendeeNameInput = document.getElementById('attendee-name');
     attendeeNameInput.value = '';
@@ -211,6 +239,7 @@
 
     for (var i = 0; i < scheduleOptions.length; i++) {
       scheduleOptions[i].checked = false;
+      scheduleOptions[i].parentElement.classList.remove('initial-availability');
     }
   };
 
