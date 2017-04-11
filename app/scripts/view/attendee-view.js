@@ -10,7 +10,7 @@
 
     scheduleTable.appendChild(tableRow);
     tableRow.appendChild(tableCell);
-    tableCell.innerHTML = `<button id="attendee-id-${attendeeData.id}">Edit</button><span>${attendeeData.name}</span>`;
+    tableCell.innerHTML = `<button id="attendee-id-${attendeeData.id}" class="btn-dynamic">Edit</button><span>${attendeeData.name}</span>`;
     var editAttendee = document.getElementById(`attendee-id-${attendeeData.id}`);
     editAttendee.addEventListener('click', attendeeView.editAttendee);
 
