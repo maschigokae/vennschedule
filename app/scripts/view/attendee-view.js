@@ -39,18 +39,13 @@
 
   attendeeView.replaceUpdatedAttendee = function(updatedAttendeeData) {
     let updatedAttendeeRecord = document.getElementById(`attendee-id-${updatedAttendeeData.id}`).parentElement;
-    console.log('Stuff I want to update', updatedAttendeeRecord.lastChild);
-
     updatedAttendeeRecord.lastChild.textContent = updatedAttendeeData.name;
 
     let updatedAvailabilityNodes = updatedAttendeeRecord.parentElement.childNodes;
-    console.log('Availability info I want to update', updatedAvailabilityNodes);
 
     for (var i = 0; i < updatedAvailabilityNodes.length - 1; i++) {
-
       let nodeToUpdate = updatedAvailabilityNodes[i + 1];
       let updatedAvailability = updatedAttendeeData.availability[i][`option${i + 1}`];
-      console.log(nodeToUpdate, updatedAvailability);
 
       let makeAvailable = function() {
         nodeToUpdate.classList.remove('attend-false');
@@ -103,11 +98,7 @@
   };
 
   attendeeView.renderAttendees = function() {
-
-    console.log('Attendee view - all attendees', Attendee.all);
-
     Attendee.all.forEach( attendee => {
-      console.log('Attendee view - each attendee', attendee);
       attendeeView.appendAttendee(attendee);
       attendeeView.calculatePollTotals(attendee.availability);
     });
@@ -131,25 +122,19 @@
       availability: attendeeAvailability
     });
 
-    console.log('new attendee:', JSON.stringify(newAttendee));
-
     Attendee.postAttendee(newAttendee);
     attendeeView.resetInputs();
   };
 
   attendeeView.editAttendee = function() {
     let editMode = event.target.parentElement.parentElement;
-    console.log('Nodes to edit', editMode.childNodes.length);
     let editName = event.target.nextSibling.textContent;
-
-    let attendeeIdToEdit = event.target.id
-    console.log('ID I need to edit...', attendeeIdToEdit);
+    let attendeeIdToEdit = event.target.id;
 
     editMode.classList.add('edit-mode');
     editMode.insertAdjacentHTML('beforebegin', `<div><form id="${event.target.id}-form"></form></div>`);
 
     let editForm = document.getElementById(`${event.target.id}-form`);
-    console.log(editForm);
     let fieldset = document.createElement('fieldset');
     let div = document.createElement('div');
 
@@ -207,8 +192,6 @@
         [`option${i - 1}`] : event.target[i].checked
       });
     };
-
-    console.log(updatedAttendeeName, updatedAttendeeAvailability);
 
     var updatedAttendee = new Attendee({
       name: updatedAttendeeName,
