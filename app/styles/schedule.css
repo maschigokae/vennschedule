@@ -1,10 +1,38 @@
 /*styles specific to scheduling functionality and results*/
 
 #schedule-selector {
-  width: 80%;
-  padding: 10px;
+  text-align: left;
+  width: 990px;
   margin: 15px auto;
+  /*background: #ddd;*/
+}
+
+#schedule-selector fieldset div {
+  text-align: center;
+  display: inline-block;
+  width: 137px;
+  padding: 14px 0 5px 12px;
   background: #ddd;
+}
+
+#schedule-selector fieldset div:not(:first-of-type):hover {
+  background: #afdf81;
+  cursor: pointer;
+}
+
+#schedule-selector fieldset div input[type=checkbox] {
+  /*outline: 1px solid red;*/
+  display: none;
+}
+
+#schedule-selector fieldset div:first-of-type {
+  padding: 0 0 0 12px;
+  width: 215px;
+  background: #ddd;
+}
+
+#schedule-selector fieldset div:last-of-type {
+  width: 130px;
 }
 
 #schedule-selector legend {
@@ -20,11 +48,11 @@
 }
 
 #attendee-name {
-  width: 60%;
+  width: 80%;
   display: block;
   margin: 8px auto;
   font-size: 15px;
-  padding: 4px;
+  padding: 4px 4px 4px 0;
 }
 
 .btn-primary {
@@ -133,7 +161,11 @@ tfoot {
   background: #bbb;
 }
 
-.most-yes-responses::after {
+.initial-availability {
+  outline: 1px solid #068a00;
+}
+
+.most-yes-responses::after, .initial-availability label::after  {
   content: " \2713 ";
   color: #068a00;
   font-weight: 700;
