@@ -180,6 +180,10 @@ tfoot {
   display:table-cell;
 }
 
+#schedule-results form div:first-of-type, #schedule-results form div:last-of-type {
+  padding: 0 0 0 7px;
+}
+
 #schedule-results div {
   position: relative;
 }
@@ -187,7 +191,6 @@ tfoot {
 #schedule-results form {
   position: absolute;
   bottom: 1;
-  left: 10px;
 }
 
 .edit-mode button, .edit-mode span {
