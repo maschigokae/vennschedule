@@ -132,7 +132,7 @@
     let attendeeIdToEdit = event.target.id;
 
     editMode.classList.add('edit-mode');
-    editMode.insertAdjacentHTML('beforebegin', `<div><form id="${event.target.id}-form"></form></div>`);
+    editMode.insertAdjacentHTML('beforebegin', `<tr><td><form id="${event.target.id}-form"></form></tr></td>`);
 
     let editForm = document.getElementById(`${event.target.id}-form`);
     let fieldset = document.createElement('fieldset');
@@ -165,8 +165,7 @@
 
     let toggleCheckboxEvent = function(node) {
       let toggleCheckbox = document.getElementById(`${attendeeIdToEdit}-option${node}`);
-
-      let correspondingAvailabilityNode = toggleCheckbox.parentElement.parentElement.parentElement.parentElement.nextSibling.childNodes[node];
+      let correspondingAvailabilityNode = toggleCheckbox.parentElement.parentElement.parentElement.parentElement.parentElement.nextSibling.childNodes[node];
 
       correspondingAvailabilityNode.addEventListener('click', function() {
         toggleCheckbox.checked ? toggleCheckbox.checked = false : toggleCheckbox.checked = true;
