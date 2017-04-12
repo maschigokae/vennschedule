@@ -197,6 +197,10 @@ tfoot {
   display: none;
 }
 
+.edit-mode .attend-true::after, .edit-mode .attend-false::after {
+  content: ' \270E';
+}
+
 .edit-mode .attend-true:hover, .edit-mode .attend-false:hover {
   opacity: .2;
   cursor: pointer;
