@@ -1,21 +1,33 @@
 {
-  "name": "vennschedule-backend",
+  "name": "vennschedule",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "**VennSchedule** - a schedule polling webapp showcasing \"vanilla\" JavaScript DOM traversal and manipulation.",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maschigokae/vennschedule.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maschigokae/vennschedule/issues"
+  },
+  "homepage": "https://github.com/maschigokae/vennschedule#readme",
   "dependencies": {
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
     "http-errors": "^1.6.1"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
     "debug": "^2.6.3",
-    "morgan": "^1.8.1"
+    "mocha": "^3.2.0",
+    "morgan": "^1.8.1",
+    "superagent": "^3.5.2"
   }
 }
