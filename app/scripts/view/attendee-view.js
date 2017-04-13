@@ -73,6 +73,8 @@
     for (var i = 0; i < editModeNodes.length; i++) {
       editModeNodes[i].classList.remove('edit-mode');
     };
+
+    attendeeView.toggleDisableButtons();
   };
 
   attendeeView.calculatePollTotals = function(opts) {
@@ -177,6 +179,8 @@
       let proxyInput = editMode.childNodes[i];
       toggleCheckboxEvent(i);
     };
+
+    attendeeView.toggleDisableButtons();
   };
 
   attendeeView.updateAttendee = function(event) {
@@ -198,7 +202,6 @@
     });
 
     Attendee.editAttendeeData(idToUpdate, updatedAttendee);
-
   };
 
   attendeeView.toggleInputs = function() {
@@ -227,6 +230,25 @@
     };
   };
 
+  attendeeView.toggleDisableButtons = function() {
+    // when an attendee is in edit mode, disable edit buttons for other attendees
+    let editMode = document.getElementsByClassName('edit-mode');
+    let deactivatedButtons = document.querySelectorAll('button.btn-dynamic');
+    console.log(deactivatedButtons);
+    console.log('editMode.length:', editMode.length);
+
+    for (var i = 0; i < deactivatedButtons.length; i++) {
+      deactivatedButtons[i].disabled = false;
+      console.log('deactivated buttons:', deactivatedButtons[i]);
+    };
+
+    if (editMode.length) {
+      for (var i = 0; i < deactivatedButtons.length; i++) {
+        deactivatedButtons[i].disabled = true;
+      };
+    }
+  };
+
   attendeeView.resetInputs = function() {
     let attendeeNameInput = document.getElementById('attendee-name');
     attendeeNameInput.value = '';
@@ -237,7 +259,7 @@
     for (var i = 0; i < scheduleOptions.length; i++) {
       scheduleOptions[i].checked = false;
       scheduleOptions[i].parentElement.classList.remove('initial-availability');
-    }
+    };
   };
 
   module.attendeeView = attendeeView;

@@ -78,7 +78,11 @@
   border: none;
 }
 
-.btn-primary:hover, .btn-dynamic:hover {
+.btn-dynamic:disabled {
+  opacity: .25;
+}
+
+.btn-primary:hover, .btn-dynamic:not(:disabled):hover {
   color: #444;
   background: #999;
 }
