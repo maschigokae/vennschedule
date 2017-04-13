@@ -1,7 +1,7 @@
 'use strict';
 
 (function(module) {
-  const API_URL = 'http://localhost:8080';
+  const API_URL = 'http://vennschedule.herokuapp.com/';
 
   function Attendee(opts) {
     Object.keys(opts).forEach( (each, index, keys) => {
