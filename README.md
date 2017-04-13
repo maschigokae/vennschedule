@@ -1,6 +1,6 @@
 **VennSchedule** - a schedule polling webapp showcasing "vanilla" JavaScript DOM traversal and manipulation.
 
-Note: This app has been tested in Chrome, Firefox, and Safari Let me know if you encounter issues in other browsers.
+Note: This app has been tested in Chrome, Firefox, and Safari. Let me know if you encounter issues in other browsers. Also, this app is still a work in progress! Check my active branches to see my most current work.
 
 To run the "full-stack" version of this app, clone the repository and switch to the "backend" branch (you may need to run `git fetch` in the command line before you're able to switch to the branch).
 
