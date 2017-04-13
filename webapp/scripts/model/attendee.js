@@ -1,8 +1,7 @@
 'use strict';
 
-const API_URL = 'http://localhost:8080';
-
 (function(module) {
+  const API_URL = 'http://localhost:8080';
 
   function Attendee(opts) {
     Object.keys(opts).forEach( (each, index, keys) => {
