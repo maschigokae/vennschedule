@@ -2,8 +2,8 @@
 
 // main dependencies
 const express = require('express');
-const cors = require('./lib/cors-middleware.js');
-const attendeeRouter = require('./route/attendee-router.js');
+const cors = require('./backend-modules/lib/cors-middleware.js');
+const attendeeRouter = require('./backend-modules/route/attendee-router.js');
 
 // dev tools
 const morgan = require('morgan');
