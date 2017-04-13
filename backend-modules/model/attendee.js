@@ -31,8 +31,18 @@ Attendee.lookupAllAttendees = function() {
   return storage.lookupAllEntries('attendee');
 };
 
-Attendee.editAttendee = function(id, entry) {
-  return storage.editEntry('attendee', id, entry);
+Attendee.editAttendee = function(id, _attendee) {
+  let checkAttendeeData = function(name, availability) {
+    if (!name) throw createError(400, 'expected name');
+    if (!availability) throw createError(400, 'expected availability data');
+  };
+
+  try {
+    checkAttendeeData(_attendee.name, _attendee.availability);
+    return storage.editEntry('attendee', id, _attendee);
+  } catch (err) {
+    return Promise.reject(err);
+  };
 };
 
 Attendee.deleteAttendee = function(id) {
