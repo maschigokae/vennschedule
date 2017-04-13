@@ -3,14 +3,17 @@
 (function(module) {
   var attendeeView = {};
 
-  var appendAttendee = function(attendeeData) {
+  attendeeView.appendAttendee = function(attendeeData) {
     let scheduleTable = document.getElementById('schedule-results');
     let tableRow = document.createElement('tr');
     let tableCell = document.createElement('td');
 
     scheduleTable.appendChild(tableRow);
     tableRow.appendChild(tableCell);
-    tableCell.innerHTML = attendeeData.name;
+    tableCell.innerHTML = `<button id="attendee-id-${attendeeData.id}" class="btn-dynamic">Edit</button><span>${attendeeData.name}</span>`;
+    var editAttendee = document.getElementById(`attendee-id-${attendeeData.id}`);
+    editAttendee.addEventListener('click', attendeeView.editAttendee);
+
     tableCell.classList.add('attendee-names');
 
     attendeeData.availability.forEach( (opt, index) => {
@@ -34,7 +37,47 @@
     }
   };
 
-  var calculatePollTotals = function(opts) {
+  attendeeView.replaceUpdatedAttendee = function(updatedAttendeeData) {
+    let updatedAttendeeRecord = document.getElementById(`attendee-id-${updatedAttendeeData.id}`).parentElement;
+    updatedAttendeeRecord.lastChild.textContent = updatedAttendeeData.name;
+
+    let updatedAvailabilityNodes = updatedAttendeeRecord.parentElement.childNodes;
+
+    for (var i = 0; i < updatedAvailabilityNodes.length - 1; i++) {
+      let nodeToUpdate = updatedAvailabilityNodes[i + 1];
+      let updatedAvailability = updatedAttendeeData.availability[i][`option${i + 1}`];
+
+      let makeAvailable = function() {
+        nodeToUpdate.classList.remove('attend-false');
+        nodeToUpdate.classList.add('attend-true');
+        nodeToUpdate.textContent = 'YES';
+      };
+
+      let makeUnavailable = function() {
+        nodeToUpdate.classList.remove('attend-true');
+        nodeToUpdate.classList.add('attend-false');
+        nodeToUpdate.textContent = 'NO';
+      };
+
+      updatedAvailability ? makeAvailable() : makeUnavailable();
+
+    };
+
+    attendeeView.calculatePollTotals(updatedAttendeeData.availability);
+
+    let editForm = document.getElementById(`attendee-id-${updatedAttendeeData.id}-form`);
+    editForm.remove();
+
+    let editModeNodes = document.getElementsByClassName('edit-mode');
+
+    for (var i = 0; i < editModeNodes.length; i++) {
+      editModeNodes[i].classList.remove('edit-mode');
+    };
+
+    attendeeView.toggleDisableButtons();
+  };
+
+  attendeeView.calculatePollTotals = function(opts) {
     let updatedTotals = [];
 
     for (var i = 0; i < opts.length; i++) {
@@ -56,7 +99,14 @@
     };
   };
 
-  attendeeView.createAttendee = function() {
+  attendeeView.renderAttendees = function() {
+    Attendee.all.forEach( attendee => {
+      attendeeView.appendAttendee(attendee);
+      attendeeView.calculatePollTotals(attendee.availability);
+    });
+  };
+
+  attendeeView.createAttendee = function(event) {
     event.preventDefault();
     let attendeeName = event.target.attendeeName.value;
 
@@ -74,11 +124,129 @@
       availability: attendeeAvailability
     });
 
-    Attendee.all.push(newAttendee);
-
-    appendAttendee(newAttendee);
-    calculatePollTotals(newAttendee.availability);
+    Attendee.postAttendee(newAttendee);
     attendeeView.resetInputs();
+  };
+
+  attendeeView.editAttendee = function(event) {
+    let editMode = event.target.parentElement.parentElement;
+    let editName = event.target.nextSibling.textContent;
+    let attendeeIdToEdit = event.target.id;
+
+    editMode.classList.add('edit-mode');
+    editMode.insertAdjacentHTML('beforebegin', `<tr><td><form id="${event.target.id}-form"></form></tr></td>`);
+
+    let editForm = document.getElementById(`${event.target.id}-form`);
+    let fieldset = document.createElement('fieldset');
+    let div = document.createElement('div');
+
+    editForm.appendChild(fieldset);
+    fieldset.appendChild(div);
+    div.innerHTML = `<input name="attendeeName" type="text" value="${editName}" autofocus required id="submit-${event.target.id}">`;
+
+    for (var i = 1; i < editMode.childNodes.length; i++) {
+      let repeatingDiv = document.createElement('div');
+      fieldset.appendChild(repeatingDiv);
+
+      let checkboxChecked = editMode.childNodes[i].classList.contains('attend-true');
+      repeatingDiv.innerHTML = checkboxChecked ? `<input type="checkbox" checked class="edit-schedule-option" id="${event.target.id}-option${i}">` : `<input type="checkbox" class="edit-schedule-option" id="${event.target.id}-option${i}">`;
+    };
+
+    let submitButton = document.createElement('div');
+    fieldset.appendChild(submitButton);
+    submitButton.innerHTML = '<input class="btn-dynamic" type="submit" value="Submit">';
+
+    let formID = document.getElementById(`${event.target.id}-form`);
+    formID.addEventListener('submit', attendeeView.updateAttendee);
+
+    let toggleAvailability = function(node, classToRemove, classToAdd) {
+      classToRemove === 'attend-false' ? node.textContent = 'YES' : node.textContent = 'NO'
+      node.classList.remove(classToRemove);
+      node.classList.add(classToAdd);
+    }
+
+    let toggleCheckboxEvent = function(node) {
+      let toggleCheckbox = document.getElementById(`${attendeeIdToEdit}-option${node}`);
+      let correspondingAvailabilityNode = toggleCheckbox.parentElement.parentElement.parentElement.parentElement.parentElement.nextSibling.childNodes[node];
+
+      correspondingAvailabilityNode.addEventListener('click', function() {
+        toggleCheckbox.checked ? toggleCheckbox.checked = false : toggleCheckbox.checked = true;
+        toggleCheckbox.checked ? toggleAvailability(correspondingAvailabilityNode, 'attend-false', 'attend-true') : toggleAvailability(correspondingAvailabilityNode, 'attend-true', 'attend-false')
+      });
+    };
+
+    for (var i = 1; i < editMode.childNodes.length; i++) {
+      let proxyInput = editMode.childNodes[i];
+      toggleCheckboxEvent(i);
+    };
+
+    attendeeView.toggleDisableButtons();
+  };
+
+  attendeeView.updateAttendee = function(event) {
+    event.preventDefault();
+
+    let idToUpdate = parseInt(event.target.id.replace(/[^0-9\.]/g, ''), 10);
+    let updatedAttendeeName = event.target.attendeeName.value;
+    let updatedAttendeeAvailability = [];
+
+    for (var i = 2; i < event.target.length - 1; i++) {
+      updatedAttendeeAvailability.push({
+        [`option${i - 1}`] : event.target[i].checked
+      });
+    };
+
+    var updatedAttendee = new Attendee({
+      name: updatedAttendeeName,
+      availability: updatedAttendeeAvailability
+    });
+
+    Attendee.editAttendeeData(idToUpdate, updatedAttendee);
+  };
+
+  attendeeView.toggleInputs = function() {
+    let availabilityCheckboxes = document.getElementsByClassName('schedule-option');
+
+    let toggleCheckedClass = function(node) {
+      node.addEventListener('click', function(event) {
+        event.preventDefault();
+
+        let checked = function() {
+          node.classList.add('initial-availability');
+          node.getElementsByTagName('input')[0].checked = true;
+        };
+
+        let unchecked = function() {
+          node.classList.remove('initial-availability')
+          node.getElementsByTagName('input')[0].checked = false;
+        };
+
+        node.classList.contains('initial-availability') ? unchecked() : checked();
+      });
+    };
+
+    for (var i = 0; i < availabilityCheckboxes.length; i ++) {
+      toggleCheckedClass(availabilityCheckboxes[i].parentElement);
+    };
+  };
+
+  attendeeView.toggleDisableButtons = function() {
+    // when an attendee is in edit mode, disable edit buttons for other attendees
+    let editMode = document.getElementsByClassName('edit-mode');
+    let deactivatedButtons = document.querySelectorAll('button.btn-dynamic');
+    console.log(deactivatedButtons);
+    console.log('editMode.length:', editMode.length);
+
+    for (var i = 0; i < deactivatedButtons.length; i++) {
+      deactivatedButtons[i].disabled = false;
+      console.log('deactivated buttons:', deactivatedButtons[i]);
+    };
+
+    if (editMode.length) {
+      for (var i = 0; i < deactivatedButtons.length; i++) {
+        deactivatedButtons[i].disabled = true;
+      };
+    }
   };
 
   attendeeView.resetInputs = function() {
@@ -90,7 +258,8 @@
 
     for (var i = 0; i < scheduleOptions.length; i++) {
       scheduleOptions[i].checked = false;
-    }
+      scheduleOptions[i].parentElement.classList.remove('initial-availability');
+    };
   };
 
   module.attendeeView = attendeeView;

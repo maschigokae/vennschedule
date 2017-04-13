@@ -1,10 +1,41 @@
 /*styles specific to scheduling functionality and results*/
 
 #schedule-selector {
-  width: 80%;
-  padding: 10px;
+  text-align: left;
+  width: 990px;
   margin: 15px auto;
+}
+
+#schedule-selector fieldset div {
+  text-align: center;
+  display: inline-block;
+  width: 137px;
+  padding: 14px 0 5px 12px;
   background: #ddd;
+}
+
+#schedule-selector fieldset div:not(:first-of-type) {
+  padding: 16px 0 10px 12px;
+}
+
+#schedule-selector fieldset div:not(:first-of-type):hover {
+  background: #afdf81;
+  cursor: pointer;
+}
+
+#schedule-selector fieldset div input[type=checkbox] {
+  display: none;
+}
+
+#schedule-selector fieldset div:first-of-type {
+  width: 215px;
+  background: #ddd;
+  float: left;
+  margin-right: 5px;
+}
+
+#schedule-selector fieldset div:last-of-type {
+  width: 128px;
 }
 
 #schedule-selector legend {
@@ -20,11 +51,11 @@
 }
 
 #attendee-name {
-  width: 60%;
+  width: 80%;
   display: block;
-  margin: 8px auto;
+  margin: 6px auto;
   font-size: 15px;
-  padding: 4px;
+  padding: 4px 4px 4px 0;
 }
 
 .btn-primary {
@@ -39,7 +70,19 @@
   margin: 8px auto;
 }
 
-.btn-primary:hover {
+.btn-dynamic {
+  width: 55px;
+  color: #ccc;
+  background: #777;
+  text-transform: uppercase;
+  border: none;
+}
+
+.btn-dynamic:disabled {
+  opacity: .25;
+}
+
+.btn-primary:hover, .btn-dynamic:not(:disabled):hover {
   color: #444;
   background: #999;
 }
@@ -94,8 +137,14 @@ th, td {
 }
 
 .attendee-names {
+  text-align: left;
   color: #444;
   background: #ddd;
+  min-width: 230px;
+}
+
+.attendee-names button, .attendee-names span {
+  margin-left: 10px;
 }
 
 .schedule-result {
@@ -119,8 +168,48 @@ tfoot {
   background: #bbb;
 }
 
-.most-yes-responses::after {
+.initial-availability {
+  outline: 1px solid #068a00;
+}
+
+.most-yes-responses::after, .initial-availability label::after  {
   content: " \2713 ";
   color: #068a00;
   font-weight: 700;
+}
+
+/*edit attendee form styles*/
+
+#schedule-results form div {
+  display:table-cell;
+}
+
+#schedule-results form div:first-of-type, #schedule-results form div:last-of-type {
+  padding: 0 0 0 7px;
+}
+
+#schedule-results div {
+  position: relative;
+}
+
+#schedule-results form {
+  position: absolute;
+  bottom: 1;
+}
+
+.edit-mode button, .edit-mode span {
+  display: none;
+}
+
+.edit-mode .attend-true::before, .edit-mode .attend-false::before {
+  content: '\270E    ';
+}
+
+.edit-mode .attend-true:hover, .edit-mode .attend-false:hover {
+  opacity: .2;
+  cursor: pointer;
+}
+
+.edit-schedule-option {
+  display: none;
 }

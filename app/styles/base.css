@@ -41,3 +41,7 @@ footer {
   text-align: center;
   line-height: 5;
 }
+
+.clearfix {
+  clear: both;
+}
