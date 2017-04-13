@@ -227,4 +227,17 @@ describe('API routes for \'Attendee\' resource', function() {
       });
     });
   });
+
+  describe('GET: /api/attendee (get all attendees)', function() {
+    it('should return an empty object, since all attendee records were deleted', done => {
+      request.get(`${url}/api/attendee`)
+      .end((err, res) => {
+        if (err) return done(err);
+        expect(res.status).to.equal(200);
+        expect(res.body).to.be.an('object');
+        expect(res.body).to.be.empty;
+        done();
+      });
+    });
+  });
 });
