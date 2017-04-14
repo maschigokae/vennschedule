@@ -1,10 +1,11 @@
 **VennSchedule** - a schedule polling webapp showcasing "vanilla" JavaScript DOM traversal and manipulation.
+Visit the deployed version of this project at https://vennschedule.herokuapp.com
 
 Note: This app has been tested in Chrome, Firefox, and Safari. Let me know if you encounter issues in other browsers. Also, this app is still a work in progress! Check my active branches to see my most current work.
 
 **To run this app locally:**
 
-Clone the repository, and in the command line, run `npm i` to install the necessary dependencies for running the backend. Then you can run `node server.js` to start the server.
+Clone the repository, and in the command line, run `npm i` to install the necessary dependencies for running the backend. Then you can run `node server.js` (or `npm start`) to start the server.
 
 The backend portion of the app is an in-memory Node/Express API. Data will persist as long as the server is running and the data is not modified or deleted via REST verbs. The API returns data as JSON. The only resource is "Attendee," which represents a person taking an availability poll. This resource has two keys: `name`, which must be a string, and `availability`, which must be an array of objects, which in turn consist of numbered `option` keys paired with boolean values.
 
