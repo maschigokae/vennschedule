@@ -4,7 +4,6 @@
   "description": "**VennSchedule** - a schedule polling webapp showcasing \"vanilla\" JavaScript DOM traversal and manipulation.",
   "main": "server.js",
   "scripts": {
-    "heroku-postbuild": "npm --prefix ./webapp install",
     "test": "gulp test",
     "start": "node server.js"
   },
