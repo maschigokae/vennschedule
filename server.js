@@ -2,7 +2,7 @@
 
 // main dependencies
 const express = require('express');
-const cors = require('./backend-modules/lib/cors-middleware.js');
+// const cors = require('./backend-modules/lib/cors-middleware.js');
 const attendeeRouter = require('./backend-modules/route/attendee-router.js');
 
 // dev tools
@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 8080;
 const app = express();
 
 app.use(morgan('dev'));
-app.use(cors);
+// app.use(cors);
 app.use(attendeeRouter);
 app.use(express.static(`${__dirname}/webapp/public`));
 
