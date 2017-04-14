@@ -10,7 +10,7 @@ const morgan = require('morgan');
 const debug = require('debug')('vennschedule:server');
 
 // app settings, server setup
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT;
 const app = express();
 
 app.use(morgan('dev'));
