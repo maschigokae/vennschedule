@@ -7,7 +7,6 @@ const cors = require('./backend-modules/lib/cors-middleware.js');
 const attendeeRouter = require('./backend-modules/route/attendee-router.js');
 
 // dev tools
-// const cors = require('cors');
 const morgan = require('morgan');
 const debug = require('debug')('vennschedule:server');
 
@@ -16,7 +15,6 @@ const PORT = process.env.PORT;
 const app = express();
 
 app.use(cors());
-// app.use(cors);
 app.use(morgan('dev'));
 app.use(attendeeRouter);
 app.use(express.static(`${__dirname}/webapp/public`));
