@@ -10,4 +10,4 @@ The backend portion of the app is an in-memory Node/Express API. Data will persi
 
 The API URL endpoints are `/api/attendee`, and `/api/attendee/param`, where "param" is a number representing a unique attendee id.
 
-Once the server is running, you can can open the local version of the `webapp/index.html` file in your favorite browser and interact with the program. The front-end JavaScript interacts with the API via ajax, and you can create and edit entries, refresh the page, and your data will persist as long as the API Node server is running.
+Once the server is running, you can can open http://localhost:8080 in your favorite browser and interact with the program. The front-end JavaScript interacts with the API via ajax, and you can create and edit entries, refresh the page, and your data will persist as long as the API Node server is running.

@@ -17,6 +17,8 @@ app.use(morgan('dev'));
 app.use(cors);
 app.use(attendeeRouter);
 
+app.use(express.static(`${__dirname}/webapp`));
+
 app.listen(PORT, () => {
   console.log(`SERVER RUNNING ON PORT ${PORT}`);
 });
