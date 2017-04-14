@@ -4,7 +4,7 @@
   "description": "**VennSchedule** - a schedule polling webapp showcasing \"vanilla\" JavaScript DOM traversal and manipulation.",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "gulp test",
     "start": "node server.js"
   },
   "repository": {
@@ -21,7 +21,8 @@
   "dependencies": {
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
-    "http-errors": "^1.6.1"
+    "http-errors": "^1.6.1",
+    "morgan": "^1.8.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",
@@ -30,7 +31,6 @@
     "gulp-eslint": "^3.0.1",
     "gulp-mocha": "^4.3.0",
     "mocha": "^3.2.0",
-    "morgan": "^1.8.1",
     "superagent": "^3.5.2"
   }
 }
