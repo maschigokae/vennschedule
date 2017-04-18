@@ -20,7 +20,7 @@ Attendee.setupAttendee = function(_attendee) {
     return storage.createEntry('attendee', attendee);
   } catch (err) {
     return Promise.reject(err);
-  };
+  }
 };
 
 Attendee.lookupAttendee = function(id) {
@@ -42,7 +42,7 @@ Attendee.editAttendee = function(id, _attendee) {
     return storage.editEntry('attendee', id, _attendee);
   } catch (err) {
     return Promise.reject(err);
-  };
+  }
 };
 
 Attendee.deleteAttendee = function(id) {

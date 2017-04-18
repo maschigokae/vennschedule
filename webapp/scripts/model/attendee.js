@@ -7,7 +7,7 @@
     Object.keys(opts).forEach( (each, index, keys) => {
       this[each] = opts[each];
     }, this);
-  };
+  }
 
   Attendee.all = [];
 
@@ -47,7 +47,7 @@
   Attendee.postAttendee = function(data) {
     var ajaxPostRequest = new XMLHttpRequest();
     ajaxPostRequest.open('POST', `${API_URL}/api/attendee`, true);
-    ajaxPostRequest.setRequestHeader("Content-Type", "application/json");
+    ajaxPostRequest.setRequestHeader('Content-Type', 'application/json');
     ajaxPostRequest.send(JSON.stringify(data));
 
     ajaxPostRequest.onload = function() {
@@ -69,7 +69,7 @@
   Attendee.editAttendeeData = function(id, data) {
     var ajaxPutRequest = new XMLHttpRequest();
     ajaxPutRequest.open('PUT', `${API_URL}/api/attendee/${id}`, true);
-    ajaxPutRequest.setRequestHeader("Content-Type", "application/json");
+    ajaxPutRequest.setRequestHeader('Content-Type', 'application/json');
     ajaxPutRequest.send(JSON.stringify(data));
 
     ajaxPutRequest.onload = function() {
@@ -84,6 +84,7 @@
     };
 
     ajaxPutRequest.onerror = function() {
+      console.log('Sorry, there was an error.');
       // add error handling here
     };
   };
@@ -92,7 +93,8 @@
     var ajaxDeleteRequest = new XMLHttpRequest();
     ajaxDeleteRequest.open('DELETE', `${API_URL}/api/attendee/${id}`, true);
 
-    ajaxPostRequest.onerror = function() {
+    ajaxDeleteRequest.onerror = function() {
+      console.log('Sorry, there was an error.');
       // add error handling here
     };
   };
